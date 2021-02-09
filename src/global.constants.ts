@@ -1,1 +1,3 @@
-export const TOKEN_NAME = "challenge_token";
+/** @format */
+
+export const TOKEN_NAME = "podcast-token";

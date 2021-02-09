@@ -1,24 +1,20 @@
+/** @format */
+
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AuthPage } from "../pages/auth/auth";
-import { IntroPage } from "../pages/auth/intro";
-import { PageNotFound } from "../pages/404";
+import { CreateAccount } from "../pages/users/create-account";
+import { Login } from "../pages/users/login";
 
 export const LoggedOutRouter = () => {
+  console.log("LoggedOutRouter");
   return (
     <Router>
       <Switch>
-        <Route path="/create-account" exact>
-          <AuthPage />
+        <Route path="/create-account">
+          <CreateAccount />
         </Route>
-        <Route path="/login" exact>
-          <AuthPage />
-        </Route>
-        <Route path="/" exact>
-          <IntroPage />
-        </Route>
-        <Route>
-          <PageNotFound />
+        <Route path="/">
+          <Login />
         </Route>
       </Switch>
     </Router>

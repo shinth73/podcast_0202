@@ -1,14 +1,12 @@
+/** @format */
+
 module.exports = {
   client: {
-    include: ["src/**/*.tsx"],
+    includes: ["./src/**/*.{tsx,ts}"],
     tagName: "gql",
     service: {
-      name: "Ubereats Challenge backend",
-      url: "https://obscure-dawn-29050.herokuapp.com/graphql",
-      // optional headers
-      headers: {
-        authorization: "Bearer lkjfalkfjadkfjeopknavadf"
-      }
-    }
-  }
+      name: "podcast",
+      url: "https://podcast-marsinn.herokuapp.com/graphql",
+    },
+  },
 };

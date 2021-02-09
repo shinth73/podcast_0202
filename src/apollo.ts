@@ -1,15 +1,11 @@
-import {
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache,
-  makeVar
-} from "@apollo/client";
+/** @format */
+
+import { ApolloClient, createHttpLink, InMemoryCache, makeVar } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { TOKEN_NAME } from "./global.constants";
 
 export const getLSToken = () => localStorage.getItem(TOKEN_NAME);
-export const setLSToken = (token: string) =>
-  localStorage.setItem(TOKEN_NAME, token);
+export const setLSToken = (token: string) => localStorage.setItem(TOKEN_NAME, token);
 export const removeLSToken = () => localStorage.removeItem(TOKEN_NAME);
 export const isLoggedInVar = makeVar(Boolean(getLSToken()));
 export const authTokenVar = makeVar(getLSToken());
@@ -25,22 +21,22 @@ export const makeLogout = () => {
   authTokenVar(null);
 };
 
-const HTTP_ENDPOINT = "https://obscure-dawn-29050.herokuapp.com/graphql";
+const HTTP_ENDPOINT = "https://podcast-marsinn.herokuapp.com/graphql";
 
 const httpLink = createHttpLink({
-  uri: HTTP_ENDPOINT
+  uri: HTTP_ENDPOINT,
 });
 
 const authLink = setContext((request, prevContext) => {
   return {
     headers: {
       ...prevContext.headers,
-      "x-jwt": authTokenVar() || ""
-    }
+      "x-jwt": authTokenVar() || "",
+    },
   };
 });
 
 export const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
