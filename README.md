@@ -8,7 +8,7 @@ Listener & Host:
 
 Host:
 [o] Create a Podcast
-Edit a Podcast
+[o] Edit a Podcast
 Delete a Podcast
 See Podcast Dashboard (See Listeners and Reviews)
 Upload an Episode

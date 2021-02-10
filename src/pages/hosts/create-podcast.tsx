@@ -1,6 +1,6 @@
 /** @format */
 
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
@@ -10,12 +10,14 @@ import {
   createPodcastMutaionVariables,
 } from "../../__generated__/createPodcastMutaion";
 import { PodcastCategory } from "../../__generated__/globalTypes";
+import { MYPODCASTS_QEURY } from "./my-podcast";
 
 const CREATE_PODCAST_MUTATION = gql`
   mutation createPodcastMutaion($createPodcastInput: CreatePodcastInput!) {
     createPodcast(input: $createPodcastInput) {
       ok
       error
+      id
     }
   }
 `;
@@ -28,20 +30,47 @@ interface IFormProps {
 }
 
 export const CreatePodcast = () => {
-  const { register, getValues, watch, errors, handleSubmit, formState } = useForm<IFormProps>({
+  const client = useApolloClient();
+  const history = useHistory();
+  const { register, getValues, formState, handleSubmit } = useForm<IFormProps>({
     mode: "onChange",
     defaultValues: {
       category: PodcastCategory.News,
     },
   });
 
-  const history = useHistory();
   const onCompleted = (data: createPodcastMutaion) => {
     const {
-      createPodcast: { ok },
+      createPodcast: { ok, id },
     } = data;
+    console.log(data);
     if (ok) {
-      history.push("/login");
+      const { title, category, coverImg, description } = getValues();
+      const queryResult = client.readQuery({ query: MYPODCASTS_QEURY });
+      console.log(queryResult);
+      let today = new Date();
+      today.toLocaleDateString();
+      client.writeQuery({
+        query: MYPODCASTS_QEURY,
+        data: {
+          getPodcastByUser: {
+            ...queryResult.getPodcastByUser,
+            podcasts: [
+              {
+                category,
+                coverImg,
+                description,
+                createdAt: today,
+                id,
+                title,
+                __typename: "Podcast",
+              },
+              ...queryResult.getPodcastByUser.podcasts,
+            ],
+          },
+        },
+      });
+      history.push("/my-podcasts");
     }
   };
   const [createPodcastMutaion, { loading, data: createPodcastMutaionResult }] = useMutation<
@@ -63,7 +92,7 @@ export const CreatePodcast = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center">
+    <div className="h-screen flex flex-col items-center mx-5">
       <Helmet>
         <title>Create Podcast | Podcastcom</title>
       </Helmet>
@@ -86,7 +115,7 @@ export const CreatePodcast = () => {
         <select
           name="category"
           ref={register({ required: true })}
-          className=" bg-black text-white outline-none border-b-2 mb-3 py-3 px-5 "
+          className=" bg-black text-white outline-none border-b-2 mb-3 py-3 px-5 mx-3"
         >
           {Object.keys(PodcastCategory).map((category, index) => (
             <option key={index}>{category}</option>

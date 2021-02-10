@@ -1,23 +1,16 @@
 /** @format */
 
-import { faPodcast, faSearch, faSignOutAlt, faUserCog } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { faDeezer } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { useMe } from "../hooks/useMe";
 
-// Arts = "Arts",
-// Movie = "Movie",
-// Education = "Education",
-// Health = "Health",
-// Music = "  Music",
-// News = "News",
-// Science = "Science",
-// Sports = "Sports",
-// Etc = "Etc",
 export const Header = withRouter(({ match, location }) => {
+  const { data: userData } = useMe();
   return (
-    <div className="md:w-full border-bottom bg-black border-b-2 border-gray-800">
+    <div className="fixed md:w-full border-bottom bg-black border-b-2 border-gray-800">
       <div
         className="sm:mx-1 md:mx-10 lg:mx-20 xl:mx-36
        text-gray-300 text-opacity-60 flex justify-between 
@@ -55,9 +48,15 @@ export const Header = withRouter(({ match, location }) => {
             </Link>
           </div>
           <div className="mx-2">
-            <Link to="/edit-profile">
-              <FontAwesomeIcon className="text-sm text-white" icon={faUserCog} />
-            </Link>
+            {userData.me.role === "Host" ? (
+              <Link to="/my-podcasts">
+                <FontAwesomeIcon className="text-sm text-white" icon={faCog} />
+              </Link>
+            ) : (
+              <Link to="/edit-profile">
+                <FontAwesomeIcon className="text-sm text-white" icon={faCog} />
+              </Link>
+            )}
           </div>
           <div className="mx-3">
             <Link to="/logout">

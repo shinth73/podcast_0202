@@ -22,12 +22,11 @@ export const Podcast: React.FC<IPodcastProps> = ({
   id,
   createdAt,
   title,
-  category,
   coverImg,
   description,
 }) => (
   <Link to={`/podcast/${id}`}>
-    <div className="flex flex-col h-full py-3 border-b text-xs border-gray-400">
+    <div className="flex flex-col h-full py-3 border-b text-xs border-gray-400 hover:bg-gray-900">
       <div className="flex flex-row mb-4">
         <div
           style={{ backgroundImage: `url(${coverImg})` }}

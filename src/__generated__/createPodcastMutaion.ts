@@ -13,6 +13,7 @@ export interface createPodcastMutaion_createPodcast {
   __typename: "CreatePodcastOutput";
   ok: boolean;
   error: string | null;
+  id: number | null;
 }
 
 export interface createPodcastMutaion {

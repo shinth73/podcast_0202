@@ -1,3 +1,5 @@
+/** @format */
+
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
 
 export const GQL_QUERY_ME = gql`

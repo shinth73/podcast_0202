@@ -38,7 +38,6 @@ export const Episodes = () => {
       },
     },
   });
-  console.log(data);
   if (!data || loading) {
     return (
       <div className="h-screen flex justify-center items-center bg-black ">
