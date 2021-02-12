@@ -34,8 +34,9 @@ export const Episodes = () => {
 
   const isSubscribe = () => {
     for (let i = 0; i < userData.me.subsriptions.length; i++) {
-      userData.me.subsriptions[i].id === +params.id;
-      return true;
+      if (userData.me.subsriptions[i].id === +params.id) {
+        return true;
+      }
     }
     return false;
   };

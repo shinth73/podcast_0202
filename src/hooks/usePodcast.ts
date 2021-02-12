@@ -9,14 +9,11 @@ const QUERY_PODCAST = gql`
       error
       ok
       podcast {
-        title
-        description
-        category
-        coverImg
-        rating
+        ...PodcastParts
       }
     }
   }
+  ${PODCAST_FRAGMENT}
 `;
 
 export const usePodcast = (id: string) => {

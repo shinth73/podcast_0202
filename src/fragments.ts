@@ -10,6 +10,7 @@ export const PODCAST_FRAGMENT = gql`
     category
     coverImg
     description
+    rating
   }
 `;
 
