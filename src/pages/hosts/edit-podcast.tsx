@@ -12,7 +12,7 @@ import {
 } from "../../__generated__/updatePodcastMutation";
 import { MYPODCASTS_QEURY } from "./my-podcast";
 
-const UPDATE_PODCAST_MUTATION = gql`
+export const UPDATE_PODCAST_MUTATION = gql`
   mutation updatePodcastMutation($updatePodcastInput: UpdatePodcastInput!) {
     updatePodcast(input: $updatePodcastInput) {
       ok
@@ -74,6 +74,11 @@ export const EditPodcast = () => {
     updatePodcastMutationVariables
   >(UPDATE_PODCAST_MUTATION, {
     onCompleted,
+    refetchQueries: [
+      {
+        query: MYPODCASTS_QEURY,
+      },
+    ],
   });
 
   const onSubmit = () => {

@@ -27,7 +27,7 @@ export const MyPodcasts = () => {
       </div>
     );
   }
-  console.log(data);
+  // console.log(data);
   return (
     <div className="w-full h-screen bg-black border-8 border-black">
       {!loading && (
@@ -55,7 +55,7 @@ export const MyPodcasts = () => {
             </div>
           </div>
           <div className="border-bottom bg-black border-b-2 border-green-800 border-opacity-60" />
-          <div className="myGrid">
+          <div className="myGrid mb-4">
             {data?.getPodcastByUser.podcasts?.map((podcast) => (
               <MyPodcast
                 key={podcast.id}

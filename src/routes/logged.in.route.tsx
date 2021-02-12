@@ -19,6 +19,7 @@ import { EditPodcast } from "../pages/hosts/edit-podcast";
 import { DeletePodcast } from "../pages/hosts/delete-podcast";
 import { MyEpisodes } from "../pages/hosts/my-episodes";
 import { DeleteEpisode } from "../pages/hosts/delete-episode";
+import { Subscription } from "../pages/users/subscription";
 
 const hostRoutes = [
   {
@@ -88,8 +89,8 @@ const commonRoutes = [
 
 const listenerRoutes = [
   {
-    path: "/",
-    component: <Home />,
+    path: "/subscription/:id",
+    component: <Subscription />,
   },
 ];
 

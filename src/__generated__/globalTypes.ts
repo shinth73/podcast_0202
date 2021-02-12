@@ -68,6 +68,10 @@ export interface SearchPodcastsInput {
   titleQuery: string;
 }
 
+export interface ToggleSubscribeInput {
+  podcastId: number;
+}
+
 export interface UpdateEpisodeInput {
   podcastId: number;
   episodeId: number;

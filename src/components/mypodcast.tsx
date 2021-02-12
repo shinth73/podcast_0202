@@ -26,7 +26,7 @@ export const MyPodcast: React.FC<IPodcastProps> = ({
   description,
 }) => (
   <div className="flex flex-col w-full h-full py-3 border-b text-xs border-gray-400 hover:bg-gray-900">
-    <div className="md:w-full md:h-full flex flex-row md:flex-col ">
+    <div className="md:w-full md:h-full grid gap-5 grid-cols-2 md:grid-cols-1">
       <div
         style={{ backgroundImage: `url(${coverImg})` }}
         className="w-32 md:w-full h-32 md:h-60  ml-2 md:ml-0 bg-cover group-hover:bg-gray-100 rounded-lg"

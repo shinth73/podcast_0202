@@ -16,7 +16,7 @@ export const MyEpisodes = () => {
   const { data, loading, error } = useEpisodes(params.id);
   let podcastId = params.id;
 
-  console.log(loading, data, error);
+  // console.log(loading, data, error);
 
   if (!data || loading || error) {
     return (
