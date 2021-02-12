@@ -29,7 +29,7 @@ export const MyPodcasts = () => {
   }
   console.log(data);
   return (
-    <div className="w-full h-full bg-black border-8 border-black">
+    <div className="w-full h-screen bg-black border-8 border-black">
       {!loading && (
         <>
           <div className="container mt-10">

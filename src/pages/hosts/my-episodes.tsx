@@ -2,21 +2,31 @@
 
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
-import { useParams } from "react-router-dom";
-import { Episode } from "../components/episode";
-import { EpisodeTitle } from "../components/episodeTitle";
-import { useEpisodes } from "../hooks/useEpisodes";
+import { Link, useParams } from "react-router-dom";
+import { MyEpisode } from "../../components/myEpisode";
+import { EpisodeTitle } from "../../components/episodeTitle";
+import { useEpisodes } from "../../hooks/useEpisodes";
 
 interface IPodcastParams {
   id: string;
 }
-export const Episodes = () => {
+
+export const MyEpisodes = () => {
   const params = useParams<IPodcastParams>();
   const { data, loading, error } = useEpisodes(params.id);
+  let podcastId = params.id;
 
   console.log(loading, data, error);
 
   if (!data || loading || error) {
+    return (
+      <div className="h-screen flex justify-center items-center bg-black ">
+        <span className="font-medium text-xl text-gray-100 tracking-wide">Loading...</span>
+      </div>
+    );
+  }
+
+  if (!data || loading) {
     return (
       <div className="h-screen flex justify-center items-center bg-black ">
         <span className="font-medium text-xl text-gray-100 tracking-wide">Loading...</span>
@@ -42,11 +52,27 @@ export const Episodes = () => {
           ) : (
             <div />
           )}
+          <div className="container mt-10">
+            <h2 className="text-4xl font-medium text-yellow-300 mb-10">Add / Edit your Episode</h2>
+            <Link
+              to={`/my-podcast/${podcastId}/create-episode`}
+              className=" mr-8 text-white bg-gray-800 py-3 px-10 hover:bg-gray-700"
+            >
+              Add Episode &rarr;
+            </Link>
+            <div className="mt-5">
+              {data?.getEpisodes.episodes?.length === 0 ? (
+                <h4 className="text-xl mb-5">Please upload a episode!</h4>
+              ) : null}
+            </div>
+          </div>
+          <div className="border-bottom bg-black border-b-2 border-green-800 border-opacity-60" />
           <div className="grid bg-black lg:grid-cols-3 border-8 border-black md:grid-cols-2 gap-x-10 gap-y-10">
             {data?.getEpisodes.episodes?.map((episode) => (
-              <Episode
+              <MyEpisode
                 key={episode.id}
                 id={episode.id}
+                podcastId={+podcastId}
                 createdAt={episode.createdAt}
                 title={episode.title}
                 description={episode.description}

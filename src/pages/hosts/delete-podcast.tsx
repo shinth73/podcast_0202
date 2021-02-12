@@ -3,8 +3,6 @@
 import { gql, useApolloClient, useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet-async";
 import { useHistory, useParams } from "react-router-dom";
-import { useDelete } from "../../hooks/useDelete";
-import { createPodcastMutaion } from "../../__generated__/createPodcastMutaion";
 import {
   deletePodcastMutaion,
   deletePodcastMutaionVariables,

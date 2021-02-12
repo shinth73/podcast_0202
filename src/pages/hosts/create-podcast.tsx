@@ -60,7 +60,7 @@ export const CreatePodcast = () => {
                 category,
                 coverImg,
                 description,
-                createdAt: today,
+                createdAt: today + "T",
                 id,
                 title,
                 __typename: "Podcast",

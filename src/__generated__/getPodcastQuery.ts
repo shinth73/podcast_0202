@@ -15,6 +15,7 @@ export interface getPodcastQuery_getPodcast_podcast {
   description: string;
   category: PodcastCategory;
   coverImg: string;
+  rating: number;
 }
 
 export interface getPodcastQuery_getPodcast {

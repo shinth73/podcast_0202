@@ -8,14 +8,17 @@ import { PageNotFound } from "../pages/404";
 import { Home } from "../pages/home";
 import { Episodes } from "../pages/episodes";
 import { useMe } from "../hooks/useMe";
+import { Search } from "../pages/search";
 import { EditProfile } from "../pages/users/edit-profile";
 import { CreatePodcast } from "../pages/hosts/create-podcast";
 import { CreateEpisode } from "../pages/hosts/create-episode";
-// import { EditEpisode } from "../pages/hosts/edit-episode";
+import { EditEpisode } from "../pages/hosts/edit-episode";
 import { MyPodcasts } from "../pages/hosts/my-podcast";
 import { Category } from "../pages/podcast-bycategory";
 import { EditPodcast } from "../pages/hosts/edit-podcast";
 import { DeletePodcast } from "../pages/hosts/delete-podcast";
+import { MyEpisodes } from "../pages/hosts/my-episodes";
+import { DeleteEpisode } from "../pages/hosts/delete-episode";
 
 const hostRoutes = [
   {
@@ -27,8 +30,16 @@ const hostRoutes = [
     component: <CreatePodcast />,
   },
   {
-    path: "/create-episode",
+    path: "/my-podcast/:id/create-episode",
     component: <CreateEpisode />,
+  },
+  {
+    path: "/my-podcasts/:podcastId/edit-episode/:episodeId",
+    component: <EditEpisode />,
+  },
+  {
+    path: "/my-podcasts/:podcastId/delete-episode/:episodeId",
+    component: <DeleteEpisode />,
   },
   {
     path: "/my-podcasts",
@@ -38,12 +49,24 @@ const hostRoutes = [
     path: "/edit-podcast/:id",
     component: <EditPodcast />,
   },
+  {
+    path: "/my-podcast/:id",
+    component: <MyEpisodes />,
+  },
+  {
+    path: "/delete-podcast/:id",
+    component: <DeletePodcast />,
+  },
 ];
 
 const commonRoutes = [
   {
     path: "/",
     component: <Home />,
+  },
+  {
+    path: "/search",
+    component: <Search />,
   },
   {
     path: "/edit-profile",
@@ -61,10 +84,6 @@ const commonRoutes = [
     path: "/category/:category",
     component: <Category />,
   },
-  {
-    path: "/delete-podcast/:id",
-    component: <DeletePodcast />,
-  },
 ];
 
 const listenerRoutes = [
@@ -79,7 +98,7 @@ export const LoggedInRouter = () => {
   if (!data || loading || error) {
     console.log("return");
     return (
-      <div className="h-screen flex justify-center items-center">
+      <div className="h-full flex justify-center items-center">
         <span className="font-medium text-xl tracking-wide">Loading...</span>
       </div>
     );

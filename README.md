@@ -9,16 +9,16 @@ Listener & Host:
 Host:
 [o] Create a Podcast
 [o] Edit a Podcast
-Delete a Podcast
+[o] Delete a Podcast
 See Podcast Dashboard (See Listeners and Reviews)
-Upload an Episode
-Edit an Episode
-Delete an Episode
+[o] Upload an Episode
+[o] Edit an Episode
+[o] Delete an Episode
 
 Listener:
-See Podcast Categories
-Search Podcasts
-See Podcast + Episodes
+[o] See Podcast Categories
+[0] Search Podcasts
+[o] See Podcast + Episodes
 Review Podcast
 Subscribe to a Podcast
 See Subscriptions

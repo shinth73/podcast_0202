@@ -1,9 +1,10 @@
 /** @format */
 
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { EPISODES_QUERY } from "../../hooks/useEpisodes";
 import {
   createEpisodeMutaion,
   createEpisodeMutaionVariables,
@@ -14,6 +15,7 @@ const CREATE_EPISODE_MUTATION = gql`
     createEpisode(input: $createEpisodeInput) {
       ok
       error
+      id
     }
   }
 `;
@@ -24,34 +26,92 @@ interface IFormProps {
   length: number;
   podcastId: number;
 }
+interface IPodcastParams {
+  id: string;
+}
 
 export const CreateEpisode = () => {
+  const client = useApolloClient();
+  const params = useParams<IPodcastParams>();
+  const history = useHistory();
+  let podcastId = params.id;
+
   const { register, getValues, watch, errors, handleSubmit, formState } = useForm<IFormProps>({
     mode: "onChange",
+    defaultValues: {
+      podcastId: +podcastId,
+    },
   });
 
-  const history = useHistory();
   const onCompleted = (data: createEpisodeMutaion) => {
     const {
-      createEpisode: { ok },
+      createEpisode: { ok, id },
     } = data;
+
     if (ok) {
-      history.push("/my-podcasts");
+      // const { title, description, length } = getValues();
+      // const queryResult = client.readQuery({ query: EPISODES_QUERY });
+      // console.log(queryResult);
+      // let today = new Date();
+      // today.toLocaleDateString();
+      // client.writeQuery({
+      //   query: EPISODES_QUERY,
+      //   variables: {
+      //     input: {
+      //       id: +podcastId,
+      //     },
+      //   },
+      //   data: {
+      //     getEpisodes: {
+      //       ...queryResult.getEpisodes,
+      //       episodes: [
+      //         {
+      //           createdAt: today,
+      //           description,
+      //           id,
+      //           length,
+      //           title,
+      //           __typename: "Episode",
+      //         },
+      //         ...queryResult.getEpisodes.episodes,
+      //       ],
+      //     },
+      //     ...queryResult.getPodcast,
+      //     getPodcast: {
+      //       ...queryResult.getPodcast,
+      //       ...queryResult.getPodcast.podcast,
+      //     },
+      //   },
+      // });
+
+      history.push(`/my-podcast/${podcastId}`);
     }
   };
+
   const [createEpisodeMutaion, { loading, data: createEpisodeMutaionResult }] = useMutation<
     createEpisodeMutaion,
     createEpisodeMutaionVariables
   >(CREATE_EPISODE_MUTATION, {
     onCompleted,
+    refetchQueries: [
+      {
+        query: EPISODES_QUERY,
+        variables: {
+          input: {
+            id: +podcastId,
+          },
+        },
+      },
+    ],
   });
 
   const onSubmit = () => {
     if (!loading) {
-      const { title, description, length, podcastId } = getValues();
+      const { title, description, length } = getValues();
+      console.log(podcastId);
       createEpisodeMutaion({
         variables: {
-          createEpisodeInput: { title, description, length, podcastId },
+          createEpisodeInput: { title, description, length: +length, podcastId: +podcastId },
         },
       });
     }
@@ -89,10 +149,10 @@ export const CreateEpisode = () => {
         <div className="text-white">Content Length</div>
         <input
           className="input bg-gray-300"
-          type="text"
+          type="number"
           name="length"
           placeholder="Minute"
-          ref={register({ required: "Cover Image is required." })}
+          ref={register({ required: "Length is required." })}
         />
         <div className="border-bottom bg-black border-b-2 border-green-800 border-opacity-60" />
         <button className="py-3 px-5 bg-green-400 text-black font-bold mt-3 text-lg rounded-full focus:outline-none hover:opacity-80">

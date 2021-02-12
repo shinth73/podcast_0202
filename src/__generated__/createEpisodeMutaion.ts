@@ -13,6 +13,7 @@ export interface createEpisodeMutaion_createEpisode {
   __typename: "CreateEpisodeOutput";
   ok: boolean;
   error: string | null;
+  id: number | null;
 }
 
 export interface createEpisodeMutaion {

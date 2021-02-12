@@ -582,6 +582,8 @@ video {
 }
 
 .input {
+  --tw-bg-opacity: 1;
+  background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
   --tw-border-opacity: 1;
   border-color: rgba(107, 114, 128, var(--tw-border-opacity));
 }
@@ -592,6 +594,7 @@ video {
 }
 
 .input {
+  border-radius: 0.25rem;
   border-width: 1px;
   font-size: 1.125rem;
   line-height: 1.75rem;

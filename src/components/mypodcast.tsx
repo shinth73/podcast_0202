@@ -8,7 +8,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDelete } from "../hooks/useDelete";
 
 interface IPodcastProps {
   id: number;
@@ -41,7 +40,7 @@ export const MyPodcast: React.FC<IPodcastProps> = ({ id, createdAt, title, cover
         Edit
       </Link>
       <Link
-        to={`/edit-podcast/${id}`}
+        to={`/my-podcast/${id}`}
         className=" w-20 text-white bg-gray-800 py-1 px-2 hover:bg-gray-700 flex justify-center rounded-full"
       >
         View

@@ -45,6 +45,11 @@ export interface EditProfileInput {
   password?: string | null;
 }
 
+export interface EpisodesSearchInput {
+  podcastId: number;
+  episodeId: number;
+}
+
 export interface GetPodcastByCategoryInput {
   category: PodcastCategory;
 }
@@ -56,6 +61,19 @@ export interface LoginInput {
 
 export interface PodcastSearchInput {
   id: number;
+}
+
+export interface SearchPodcastsInput {
+  page?: number | null;
+  titleQuery: string;
+}
+
+export interface UpdateEpisodeInput {
+  podcastId: number;
+  episodeId: number;
+  title?: string | null;
+  description: string;
+  length: number;
 }
 
 export interface UpdatePodcastInput {
