@@ -53,7 +53,7 @@ export const Header = withRouter(({ match, location }) => {
             <Link to="/category/Movie">Movie</Link>
           </div>
           <div className="py-2 w-1/5 flex justify-center text-sm font-bold border-bottom border-b-4 border-yellow-400 border-opacity-0 hover:border-opacity-70">
-            <Link to="/category/More">Music</Link>
+            <Link to="/category/Music">Music</Link>
           </div>
           <div className="py-2 w-1/5  flex justify-center text-sm font-bold border-bottom border-b-4 border-yellow-400 border-opacity-0 hover:border-opacity-70">
             <Link to="/category/Health">Health</Link>

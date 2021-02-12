@@ -7,4 +7,8 @@
   @apply focus:outline-none focus:border-gray-700 p-3 border text-lg border-gray-500 transition-colors bg-gray-600 rounded;
 }
 
+.myGrid {
+  @apply grid bg-black lg:grid-cols-4 border-8 border-black md:grid-cols-3 gap-x-10 gap-y-10;
+}
+
 @tailwind utilities;

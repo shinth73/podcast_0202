@@ -37,12 +37,13 @@ export const Episodes = () => {
                 title={data.getPodcast.podcast.title}
                 description={data.getPodcast.podcast.description}
                 category={data.getPodcast.podcast.category}
+                role={"listener"}
               />{" "}
             </div>
           ) : (
             <div />
           )}
-          <div className="grid bg-black lg:grid-cols-3 border-8 border-black md:grid-cols-2 gap-x-10 gap-y-10">
+          <div className="myGrid">
             {data?.getEpisodes.episodes?.map((episode) => (
               <Episode
                 key={episode.id}

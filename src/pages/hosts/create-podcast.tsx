@@ -78,6 +78,11 @@ export const CreatePodcast = () => {
     createPodcastMutaionVariables
   >(CREATE_PODCAST_MUTATION, {
     onCompleted,
+    refetchQueries: [
+      {
+        query: MYPODCASTS_QEURY,
+      },
+    ],
   });
 
   const onSubmit = () => {

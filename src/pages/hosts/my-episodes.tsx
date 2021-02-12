@@ -47,18 +47,19 @@ export const MyEpisodes = () => {
                 title={data.getPodcast.podcast.title}
                 description={data.getPodcast.podcast.description}
                 category={data.getPodcast.podcast.category}
+                role={"host"}
               />{" "}
             </div>
           ) : (
             <div />
           )}
           <div className="container mt-10">
-            <h2 className="text-4xl font-medium text-yellow-300 mb-10">Add / Edit your Episode</h2>
+            <h2 className="text-2xl font-medium text-green-300 mb-10">Add / Edit your Episode</h2>
             <Link
               to={`/my-podcast/${podcastId}/create-episode`}
-              className=" mr-8 text-white bg-gray-800 py-3 px-10 hover:bg-gray-700"
+              className=" mr-8 text-white rounded-lg bg-gray-800 py-1 px-10 hover:bg-gray-700"
             >
-              Add Episode &rarr;
+              Add Episode
             </Link>
             <div className="mt-5">
               {data?.getEpisodes.episodes?.length === 0 ? (
@@ -67,7 +68,7 @@ export const MyEpisodes = () => {
             </div>
           </div>
           <div className="border-bottom bg-black border-b-2 border-green-800 border-opacity-60" />
-          <div className="grid bg-black lg:grid-cols-3 border-8 border-black md:grid-cols-2 gap-x-10 gap-y-10">
+          <div className="myGrid">
             {data?.getEpisodes.episodes?.map((episode) => (
               <MyEpisode
                 key={episode.id}

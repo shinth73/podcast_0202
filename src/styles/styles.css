@@ -612,6 +612,30 @@ video {
   transition-duration: 150ms;
 }
 
+.myGrid {
+  --tw-bg-opacity: 1;
+  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-width: 8px;
+  display: grid;
+  -webkit-column-gap: 2.5rem;
+          column-gap: 2.5rem;
+  row-gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .myGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .myGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));

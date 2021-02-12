@@ -31,7 +31,7 @@ export const Home = () => {
   return (
     <div className="w-full h-screen bg-black border-8 border-black">
       {!loading && (
-        <div className="grid bg-black lg:grid-cols-3 border-8 border-black md:grid-cols-2 gap-x-10 gap-y-10">
+        <div className="myGrid">
           {data?.getAllPodcasts.podcasts?.map((podcast) => (
             <Podcast
               key={podcast.id}
